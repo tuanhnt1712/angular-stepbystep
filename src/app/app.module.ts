@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 
 import { AppComponent } from './app.component';
 import { PeopleListComponent } from './people-list/people-list.component';
 import { PersonDetailsComponent } from './person-details/person-details.component';
 
-import { appRouterModule } from "./app.routes";
+import { AppRoutingModule } from "./app.routes";
 
 
 @NgModule({
@@ -17,8 +18,9 @@ import { appRouterModule } from "./app.routes";
     PersonDetailsComponent
   ],
   imports: [
+    HttpModule,
     BrowserModule,
-    appRouterModule,
+    AppRoutingModule,
     FormsModule
   ],
   providers: [],
