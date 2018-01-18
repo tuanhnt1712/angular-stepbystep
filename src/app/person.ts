@@ -1,5 +1,7 @@
 export interface Person {
-    name: string;
-    weight: number;
-    height: number;
+	id: number;
+  name: string;
+  weight: number;
+  height: number;
+  profession?: string;
 }
