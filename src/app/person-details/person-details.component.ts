@@ -11,23 +11,25 @@ import { Person } from "../person";
 })
 
 export class PersonDetailsComponent implements OnInit, OnDestroy {
+  professions: string[] = ['jedi', 'bounty hunter', 'princess', 'sith lord'];
   person: Person;
   sub:any;
-  professions: string[] = ['jedi', 'bounty hunter', 'princess', 'sith lord'];
 
-   constructor(private peopleService: PeopleService,
-              private route: ActivatedRoute,
-              private router: Router){
-  }
+  constructor(private route: ActivatedRoute,
+              private peopleService: PeopleService,
+              private router: Router) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       let id = Number.parseInt(params['id']);
-      this.person = this.peopleService.get(id);
+      console.log('getting person with id: ', id);
+      this.peopleService
+        .get(id)
+        .subscribe(p => this.person = p);
     });
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
@@ -37,6 +39,7 @@ export class PersonDetailsComponent implements OnInit, OnDestroy {
   }
 
   savePersonDetails(){
-    this.peopleService.save(this.person);
+      this.peopleService
+          .save(this.person)
+          .subscribe(r => console.log(`saved!!! ${JSON.stringify(this.person)}`));
   }
-}
